@@ -1,0 +1,1756 @@
+{
+ "wrangler": "4.150.0",
+ "measured": "2026-10-17",
+ "configs": {
+  "no_flags": {
+   "date": "2025-06-01",
+   "flags": [],
+   "results": {
+    "node:assert": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-08_353.log\"\n"
+     }
+    },
+    "assert": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:async_hooks": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-09_398.log\"\n"
+     }
+    },
+    "async_hooks": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:buffer": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-10_434.log\"\n"
+     }
+    },
+    "buffer": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:child_process": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-12_451.log\"\n"
+     }
+    },
+    "child_process": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:cluster": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-13_511.log\"\n"
+     }
+    },
+    "cluster": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:console": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-14_552.log\"\n"
+     }
+    },
+    "console": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:constants": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-15_537.log\"\n"
+     }
+    },
+    "constants": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:crypto": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-16_562.log\"\n"
+     }
+    },
+    "crypto": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:dgram": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-17_583.log\"\n"
+     }
+    },
+    "dgram": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:diagnostics_channel": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-18_589.log\"\n"
+     }
+    },
+    "diagnostics_channel": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:dns": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-19_605.log\"\n"
+     }
+    },
+    "dns": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:domain": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-20_637.log\"\n"
+     }
+    },
+    "domain": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:events": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-21_641.log\"\n"
+     }
+    },
+    "events": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:fs": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-22_659.log\"\n"
+     }
+    },
+    "fs": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:fs/promises": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-23_675.log\"\n"
+     }
+    },
+    "fs/promises": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:http": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-24_636.log\"\n"
+     }
+    },
+    "http": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:http2": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-25_677.log\"\n"
+     }
+    },
+    "http2": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:https": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-27_687.log\"\n"
+     }
+    },
+    "https": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:inspector": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-28_699.log\"\n"
+     }
+    },
+    "inspector": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:module": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-30_120.log\"\n"
+     }
+    },
+    "module": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:net": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: mp/wr/node_modules/wrangler/wrangler-dist/cli.js:375149:17\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {\n  code: 'ERR_IPC_CHANNEL_CLOSED'\n}\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-31_132.log\"\n"
+     }
+    },
+    "net": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:os": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-32_163.log\"\n"
+     }
+    },
+    "os": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:path": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-33_159.log\"\n"
+     }
+    },
+    "path": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:perf_hooks": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-34_178.log\"\n"
+     }
+    },
+    "perf_hooks": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:process": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "process": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:punycode": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-36_261.log\"\n"
+     }
+    },
+    "punycode": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:querystring": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-37_272.log\"\n"
+     }
+    },
+    "querystring": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:readline": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-38_304.log\"\n"
+     }
+    },
+    "readline": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:repl": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-39_332.log\"\n"
+     }
+    },
+    "repl": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:sqlite": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-40_339.log\"\n"
+     }
+    },
+    "sqlite": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:stream": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-41_332.log\"\n"
+     }
+    },
+    "stream": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:string_decoder": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-42_372.log\"\n"
+     }
+    },
+    "string_decoder": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:timers": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-43_419.log\"\n"
+     }
+    },
+    "timers": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:tls": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-44_402.log\"\n"
+     }
+    },
+    "tls": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:trace_events": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-45_849.log\"\n"
+     }
+    },
+    "trace_events": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:tty": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-46_851.log\"\n"
+     }
+    },
+    "tty": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:url": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-47_866.log\"\n"
+     }
+    },
+    "url": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:util": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-48_887.log\"\n"
+     }
+    },
+    "util": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:v8": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-49_926.log\"\n"
+     }
+    },
+    "v8": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:vm": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-50_910.log\"\n"
+     }
+    },
+    "vm": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:wasi": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-51_934.log\"\n"
+     }
+    },
+    "wasi": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:worker_threads": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-52_950.log\"\n"
+     }
+    },
+    "worker_threads": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:zlib": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-34-53_971.log\"\n"
+     }
+    },
+    "zlib": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    }
+   }
+  },
+  "v1": {
+   "date": "2024-01-01",
+   "flags": [
+    "nodejs_compat"
+   ],
+   "results": {
+    "node:assert": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "ok"
+     }
+    },
+    "assert": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:async_hooks": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "ok"
+     }
+    },
+    "async_hooks": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:buffer": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "aGk="
+     }
+    },
+    "buffer": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:child_process": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-33_200.log\"\n"
+     }
+    },
+    "child_process": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:cluster": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-34_208.log\"\n"
+     }
+    },
+    "cluster": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:console": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-35_653.log\"\n"
+     }
+    },
+    "console": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:constants": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "240"
+     }
+    },
+    "constants": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:crypto": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "2d711642"
+     }
+    },
+    "crypto": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:dgram": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-38_785.log\"\n"
+     }
+    },
+    "dgram": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:diagnostics_channel": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "diagnostics_channel": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:dns": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "dns": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:domain": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-41_911.log\"\n"
+     }
+    },
+    "domain": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:events": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "0"
+     }
+    },
+    "events": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:fs": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-43_947.log\"\n"
+     }
+    },
+    "fs": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:fs/promises": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "fs/promises": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:http": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-47_051.log\"\n"
+     }
+    },
+    "http": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:http2": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-48_061.log\"\n"
+     }
+    },
+    "http2": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:https": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-49_085.log\"\n"
+     }
+    },
+    "https": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:inspector": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-50_095.log\"\n"
+     }
+    },
+    "inspector": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:module": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "module": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:net": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "4"
+     }
+    },
+    "net": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:os": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-53_343.log\"\n"
+     }
+    },
+    "os": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:path": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "a/b"
+     }
+    },
+    "path": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:perf_hooks": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-56_343.log\"\n"
+     }
+    },
+    "perf_hooks": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:process": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "process": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:punycode": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-35-58_468.log\"\n"
+     }
+    },
+    "punycode": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:querystring": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "a=1"
+     }
+    },
+    "querystring": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:readline": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-36-01_978.log\"\n"
+     }
+    },
+    "readline": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:repl": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-36-03_415.log\"\n"
+     }
+    },
+    "repl": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:sqlite": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-36-04_440.log\"\n"
+     }
+    },
+    "sqlite": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:stream": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "stream": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:string_decoder": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "hi"
+     }
+    },
+    "string_decoder": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:timers": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "timers": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:tls": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "tls": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:trace_events": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-36-09_602.log\"\n"
+     }
+    },
+    "trace_events": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:tty": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-36-11_623.log\"\n"
+     }
+    },
+    "tty": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:url": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "x.dev"
+     }
+    },
+    "url": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:util": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "ok"
+     }
+    },
+    "util": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:v8": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-36-14_706.log\"\n"
+     }
+    },
+    "v8": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:vm": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-36-15_732.log\"\n"
+     }
+    },
+    "vm": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:wasi": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-36-16_748.log\"\n"
+     }
+    },
+    "wasi": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:worker_threads": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "worker failed to start: thub.com/cloudflare/workers-sdk/issues/new/choose\u001b[0m\nNote that there is a newer version of Wrangler available (4.151.1). Consider checking whether upgrading resolves this error.\n🪵  Logs were written to \"/Users/rishavbhattarai/Library/Preferences/.wrangler/logs/wrangler-2026-10-17_17-36-17_733.log\"\n"
+     }
+    },
+    "worker_threads": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    },
+    "node:zlib": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "Compatibility flag \"nodejs_zlib\" is not enabled"
+     }
+    },
+    "zlib": {
+     "bundles": false,
+     "bundle_error": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mBuild failed with 1 error:\u001b[0m"
+    }
+   }
+  },
+  "v2": {
+   "date": "2024-09-23",
+   "flags": [
+    "nodejs_compat"
+   ],
+   "results": {
+    "node:assert": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "ok"
+     }
+    },
+    "node:async_hooks": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "ok"
+     }
+    },
+    "node:buffer": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "aGk="
+     }
+    },
+    "node:child_process": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "[unenv] child_process.execSyn is not implemented yet!"
+     }
+    },
+    "node:cluster": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "[unenv] cluster.fork is not implemented yet!"
+     }
+    },
+    "node:console": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:constants": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "240"
+     }
+    },
+    "node:crypto": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "2d711642"
+     }
+    },
+    "node:dgram": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "socket"
+     }
+    },
+    "node:diagnostics_channel": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:dns": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:domain": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:events": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "0"
+     }
+    },
+    "node:fs": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "[unenv] fs.writeFileSync is not implemented yet!"
+     }
+    },
+    "node:fs/promises": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:http": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:http2": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "[unenv] http2.connect is not implemented yet!"
+     }
+    },
+    "node:https": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:inspector": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "no url"
+     }
+    },
+    "node:module": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:net": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "4"
+     }
+    },
+    "node:os": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "linux"
+     }
+    },
+    "node:path": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "a/b"
+     }
+    },
+    "node:perf_hooks": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "number"
+     }
+    },
+    "node:process": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:punycode": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "xn--maana-pta"
+     }
+    },
+    "node:querystring": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "a=1"
+     }
+    },
+    "node:readline": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:repl": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:sqlite": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "[unenv] sqlite.DatabaseSync is not implemented yet!"
+     }
+    },
+    "node:stream": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:string_decoder": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "hi"
+     }
+    },
+    "node:timers": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:tls": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:trace_events": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "tracing"
+     }
+    },
+    "node:tty": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "false"
+     }
+    },
+    "node:url": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "x.dev"
+     }
+    },
+    "node:util": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "ok"
+     }
+    },
+    "node:v8": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "number"
+     }
+    },
+    "node:vm": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "[unenv] vm.runInNewContext is not implemented yet!"
+     }
+    },
+    "node:wasi": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "[unenv] wasi.WASI is not implemented yet!"
+     }
+    },
+    "node:worker_threads": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "worker"
+     }
+    },
+    "node:zlib": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "21"
+     }
+    }
+   }
+  },
+  "current": {
+   "date": "2026-10-01",
+   "flags": [
+    "nodejs_compat"
+   ],
+   "results": {
+    "node:assert": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "ok"
+     }
+    },
+    "node:async_hooks": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "ok"
+     }
+    },
+    "node:buffer": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "aGk="
+     }
+    },
+    "node:child_process": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "The child_process.execSync method is not implemented"
+     }
+    },
+    "node:cluster": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "The cluster.fork method is not implemented"
+     }
+    },
+    "node:console": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:constants": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "240"
+     }
+    },
+    "node:crypto": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "2d711642"
+     }
+    },
+    "node:dgram": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "socket"
+     }
+    },
+    "node:diagnostics_channel": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:dns": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:domain": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "m.create is not a function"
+     }
+    },
+    "node:events": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "0"
+     }
+    },
+    "node:fs": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "y"
+     }
+    },
+    "node:fs/promises": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:http": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:http2": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "The http2.connect method is not implemented"
+     }
+    },
+    "node:https": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:inspector": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "no url"
+     }
+    },
+    "node:module": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:net": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "4"
+     }
+    },
+    "node:os": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "linux"
+     }
+    },
+    "node:path": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "a/b"
+     }
+    },
+    "node:perf_hooks": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "number"
+     }
+    },
+    "node:process": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:punycode": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "xn--maana-pta"
+     }
+    },
+    "node:querystring": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "a=1"
+     }
+    },
+    "node:readline": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:repl": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:sqlite": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "Illegal constructor"
+     }
+    },
+    "node:stream": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:string_decoder": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "hi"
+     }
+    },
+    "node:timers": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:tls": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "function"
+     }
+    },
+    "node:trace_events": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "tracing"
+     }
+    },
+    "node:tty": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "false"
+     }
+    },
+    "node:url": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "x.dev"
+     }
+    },
+    "node:util": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "ok"
+     }
+    },
+    "node:v8": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "number"
+     }
+    },
+    "node:vm": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "The runInThisContext method is not implemented"
+     }
+    },
+    "node:wasi": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "The WASI method is not implemented"
+     }
+    },
+    "node:worker_threads": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": false,
+      "error": "The Worker method is not implemented"
+     }
+    },
+    "node:zlib": {
+     "bundles": true,
+     "bundle_error": "",
+     "runtime": {
+      "ok": true,
+      "value": "21"
+     }
+    }
+   }
+  }
+ }
+}

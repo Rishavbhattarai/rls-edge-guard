@@ -18,7 +18,6 @@ SKIP_DIRS = {"node_modules", ".wrangler", ".git", "dist", "build", ".open-next",
              ".svelte-kit", ".output", "coverage", "test", "tests", "__tests__", "scripts"}
 TEST_FILE = re.compile(r"\.(test|spec)\.[cm]?[jt]sx?$|\.config\.[cm]?[jt]s$|\.d\.ts$")
 MAX_FILES = 400
-PROCESS_ENV_DATE = "2025-04-01"
 
 _MATRIX = None
 
@@ -54,11 +53,21 @@ class WranglerConfig:
             "nodejs_compat_v2" in self.flags or self.date >= matrix()["v2_date"])
 
     @property
+    def fs_real(self) -> bool:
+        return self.v2 and self.date >= matrix()["fs_date"]
+
+    @property
+    def process_global(self) -> bool:
+        return self.nodejs_compat or self.date >= matrix()["process_global_no_flags_date"]
+
+    @property
     def process_env_populated(self) -> bool:
         if "nodejs_compat_do_not_populate_process_env" in self.flags:
             return False
-        return self.nodejs_compat and (
-            "nodejs_compat_populate_process_env" in self.flags or self.date >= PROCESS_ENV_DATE)
+        if not self.nodejs_compat:
+            return self.process_global
+        return ("nodejs_compat_populate_process_env" in self.flags
+                or self.date >= matrix()["process_env_date"])
 
     def flag_fix(self) -> str:
         if self.path.endswith(".toml"):
@@ -235,7 +244,7 @@ def _builtin_name(spec: str):
     if spec.startswith("node:"):
         return spec[5:], True
     m = matrix()
-    if spec in set(m["v1"]) | set(m["v2"]) | set(m["fs"]) | set(m["runtime_error"]):
+    if spec in set(m["v1"]) | set(m["v2"]) | set(m["fs"]) | set(m["runtime_error"]) | set(m["partial"]):
         return spec, False
     return None
 
@@ -281,15 +290,15 @@ def check_source(path: str, src: str, cfg: WranglerConfig) -> list:
     hit = _PROCESS_ENV.search(no_strings)
     if hit:
         line = jsscan.line_of(no_strings, hit.start())
-        if not cfg.nodejs_compat:
-            add("EDGE005", BLOCK, line, "process is not defined in Workers without nodejs_compat, "
-                "so process.env throws a ReferenceError.",
+        if not cfg.process_global:
+            add("EDGE005", BLOCK, line, "process is not defined in Workers without nodejs_compat "
+                f"(compatibility_date {cfg.date or 'unset'}), so process.env throws a ReferenceError.",
                 "Read bindings from the env argument (env.MY_SECRET), or add " + cfg.flag_fix())
         elif not cfg.process_env_populated:
             add("EDGE005", WARN, line, f"process.env is empty with compatibility_date {cfg.date}, "
                 "so every value reads as undefined.",
                 f"Read env.MY_SECRET from the handler's env argument, or set compatibility_date "
-                f">= {PROCESS_ENV_DATE}.")
+                f">= {matrix()['process_env_date']}.")
 
     _check_top_level_io(no_strings, add)
     return out
@@ -297,19 +306,16 @@ def check_source(path: str, src: str, cfg: WranglerConfig) -> list:
 
 def _check_builtin(name, prefixed, spec, line, cfg, add, m):
     base = name
+    top = base.split("/")[0]
     if base in m["runtime_error"]:
         add("EDGE001", BLOCK, line, f"'{spec}' can be imported but its APIs throw in Workers.",
-            m["alternatives"].get(base.split("/")[0], ""))
+            m["alternatives"].get(top, ""))
         return
-    if base in m["fs"]:
-        if not cfg.nodejs_compat:
-            add("EDGE002", BLOCK, line, f"'{spec}' needs the nodejs_compat flag, which is not set "
-                f"in {os.path.basename(cfg.path)}.", "Add " + cfg.flag_fix())
-        add("EDGE007", WARN, line, "node:fs in Workers is a virtual filesystem. Files from "
-            "your project are not there at runtime.", m["alternatives"]["fs"])
+    if base in m["partial"]:
+        add("EDGE001", WARN, line, f"'{spec}' is only a partial stub in Workers. Expect missing "
+            "or non-functional APIs.", m["alternatives"].get(top, ""))
         return
-    v1, v2 = set(m["v1"]), set(m["v2"])
-    if base not in v1 and base not in v2:
+    if base in m["no_flags"] and prefixed:
         return
     if not prefixed and not cfg.nodejs_compat and _shim_installed(cfg.root, base):
         return  # bare specifier resolves to an npm polyfill (e.g. 'events', 'buffer')
@@ -319,18 +325,29 @@ def _check_builtin(name, prefixed, spec, line, cfg, add, m):
                 "Wrangler 4 removed.", "Replace node_compat = true with " + cfg.flag_fix())
             return
         add("EDGE002", BLOCK, line, f"'{spec}' needs the nodejs_compat flag, which is not set in "
-            f"{os.path.basename(cfg.path)}. The build fails or the import throws.",
-            "Add " + cfg.flag_fix())
+            f"{os.path.basename(cfg.path)}. The Worker fails to start.", "Add " + cfg.flag_fix())
+        return
+    if base in m["fs"]:
+        if not cfg.v2:
+            add("EDGE002", BLOCK, line, f"'{spec}' needs nodejs_compat v2, but compatibility_date "
+                f"is {cfg.date or 'unset'}.", f"Set compatibility_date >= {m['fs_date']}.")
+        elif not cfg.fs_real:
+            add("EDGE001", BLOCK, line, f"'{spec}' is a stub before compatibility_date "
+                f"{m['fs_date']} (this project: {cfg.date}); calls like readFileSync throw.",
+                f"Set compatibility_date >= {m['fs_date']}, or: {m['alternatives']['fs']}")
+        else:
+            add("EDGE007", WARN, line, "node:fs in Workers is a virtual filesystem. Files from "
+                "your project are not there at runtime.", m["alternatives"]["fs"])
         return
     if cfg.v2:
         return
-    if base in v1 and prefixed:
-        return
-    if base in v1:
+    if base in m["v1"]:
+        if prefixed:
+            return
         add("EDGE002", BLOCK, line, f"bare '{spec}' needs the node: prefix under nodejs_compat v1 "
             f"(compatibility_date {cfg.date or 'unset'}).",
             f"Import 'node:{spec}', or set compatibility_date >= {m['v2_date']}.")
-    else:
+    elif base in m["v2"]:
         add("EDGE002", BLOCK, line, f"'{spec}' needs nodejs_compat v2, but compatibility_date is "
             f"{cfg.date or 'unset'}.", f"Set compatibility_date >= {m['v2_date']}.")
 

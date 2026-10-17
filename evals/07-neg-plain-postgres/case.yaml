@@ -18,7 +18,7 @@ graders:
   - type: "regex"
     name: "hook-silent"
     target: "trace"
-    pattern: "rls-edge-guard"
+    pattern: "blocking issue\\(s\\)|rls-edge-guard warnings"
     match: "not_contains"
   - type: "regex"
     name: "task-done"

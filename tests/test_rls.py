@@ -140,6 +140,20 @@ class Policies(unittest.TestCase):
         self.assertEqual(rules(self.T + "create policy p on t for select to authenticated using "
                                         "(((select auth.jwt()) -> 'app_metadata' ->> 'role') = 'admin');"), [])
 
+    def test_user_metadata_via_helper_function(self):
+        fn = ("create function private.is_admin() returns boolean language sql stable security definer "
+              "set search_path = '' as $$ select coalesce((select (raw_user_meta_data->>'is_admin')::boolean "
+              "from auth.users where id = (select auth.uid())), false) $$;")
+        self.assertEqual(rules(self.T + fn, "create policy p on t for select to authenticated "
+                                            "using ((select private.is_admin()));"), ["RLS004"])
+
+    def test_signup_trigger_reading_metadata_is_fine(self):
+        trig = ("create function public.handle_new_user() returns trigger language plpgsql security definer "
+                "set search_path = '' as $$ begin insert into public.profiles (id, full_name) values "
+                "(new.id, new.raw_user_meta_data->>'full_name'); return new; end; $$; "
+                "revoke execute on function public.handle_new_user() from public, anon, authenticated;")
+        self.assertEqual(rules(self.T + trig), [])
+
     def test_missing_to_and_bare_auth_uid(self):
         self.assertEqual(rules(self.T + "create policy p on t for select using (auth.uid() = user_id);"),
                          ["RLS007", "RLS008"])

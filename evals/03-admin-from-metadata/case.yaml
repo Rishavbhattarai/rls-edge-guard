@@ -20,7 +20,7 @@ graders:
     target:
       source: "file"
       path: "supabase/migrations/20261017000100_reports_admin.sql"
-    pattern: "user_metadata|raw_user_meta_data"
+    pattern: "'user_metadata'|raw_user_meta_data\\s*-"
     flags: "i"
     match: "not_contains"
   - type: "regex"

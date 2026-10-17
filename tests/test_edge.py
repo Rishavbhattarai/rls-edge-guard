@@ -26,6 +26,8 @@ def cfg_for(toml):
 COMPAT = cfg_for('name = "w"\nmain = "src/index.ts"\ncompatibility_date = "2025-06-01"\n'
                  'compatibility_flags = ["nodejs_compat"]\n')
 NO_COMPAT = cfg_for('name = "w"\nmain = "src/index.ts"\ncompatibility_date = "2025-06-01"\n')
+NEW = cfg_for('name = "w"\ncompatibility_date = "2026-10-01"\ncompatibility_flags = ["nodejs_compat"]\n')
+NEW_NO_FLAGS = cfg_for('name = "w"\ncompatibility_date = "2026-08-04"\n')
 V1 = cfg_for('name = "w"\ncompatibility_date = "2024-01-01"\ncompatibility_flags = ["nodejs_compat"]\n')
 
 
@@ -102,9 +104,27 @@ class Rules(unittest.TestCase):
         self.assertEqual(rules("import { EventEmitter } from 'events';", c), [])
         self.assertEqual(rules("import { EventEmitter } from 'node:events';", c), ["EDGE002"])
 
-    def test_fs_is_virtual(self):
-        self.assertEqual(rules("import { readFileSync } from 'node:fs';", COMPAT), ["EDGE007"])
-        self.assertEqual(rules("import fs from 'fs/promises';", NO_COMPAT), ["EDGE002", "EDGE007"])
+    def test_fs_by_date(self):
+        # Measured: unenv stubs that throw before 2025-09-15, a virtual filesystem from then on.
+        self.assertEqual(rules("import { readFileSync } from 'node:fs';", COMPAT), ["EDGE001"])
+        self.assertEqual(rules("import { readFileSync } from 'node:fs';", NEW), ["EDGE007"])
+        self.assertEqual(rules("import fs from 'node:fs/promises';", V1), ["EDGE002"])
+        self.assertEqual(rules("import fs from 'fs/promises';", NO_COMPAT), ["EDGE002"])
+
+    def test_measured_v1_modules(self):
+        # Measured working with nodejs_compat at 2024-01-01 (node: prefix).
+        for mod in ("net", "dns", "tls", "url", "timers", "querystring", "module", "constants"):
+            self.assertEqual(rules(f"import x from 'node:{mod}';", V1), [], mod)
+        for mod in ("os", "zlib", "http", "console", "perf_hooks"):
+            self.assertEqual(rules(f"import x from 'node:{mod}';", V1), ["EDGE002"], mod)
+
+    def test_node_process_needs_no_flag(self):
+        self.assertEqual(rules("import process from 'node:process';", NO_COMPAT), [])
+
+    def test_partial_stubs_warn(self):
+        self.assertEqual(rules("import dgram from 'node:dgram';", NEW), ["EDGE001"])
+        self.assertEqual(rules("import dgram from 'node:dgram';", NEW, severity="block"), [])
+        self.assertEqual(rules("import { getHeapStatistics } from 'node:v8';", NEW), [])
 
     def test_packages(self):
         self.assertEqual(rules("import bcrypt from 'bcrypt';", COMPAT), ["EDGE003"])
@@ -124,6 +144,8 @@ class Rules(unittest.TestCase):
         self.assertEqual(rules("export default { fetch() { return process.env.KEY } }", COMPAT), [])
         old = cfg_for('compatibility_date = "2024-12-01"\ncompatibility_flags = ["nodejs_compat"]\n')
         self.assertEqual(rules("export default { fetch() { return process.env.KEY } }", old), ["EDGE005"])
+        # Measured: from 2026-08-04 the process global (with populated env) exists without flags.
+        self.assertEqual(rules("export default { fetch() { return process.env.KEY } }", NEW_NO_FLAGS), [])
 
     def test_module_scope_io(self):
         self.assertEqual(rules("const cfg = await fetch('https://x');\n", COMPAT), ["EDGE006"])

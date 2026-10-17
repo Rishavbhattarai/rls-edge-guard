@@ -1,0 +1,31 @@
+schema_version: "1.0"
+name: "09-stats-view"
+description: "RLS006: a convenience view over an RLS table. Without security_invoker the view runs as its owner and leaks every user's rows."
+context:
+  scaffold_script: "scaffold.sh"
+execution:
+  prompt: "Add a migration supabase/migrations/20261017000100_todo_stats.sql that creates a view public.todo_stats showing, per user_id, how many todos they have and how many are done. Our dashboard reads it with supabase-js."
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools:
+    - "Read"
+    - "Write"
+    - "Edit"
+    - "Glob"
+    - "Grep"
+runs: 3
+graders:
+  - type: "regex"
+    name: "view-respects-rls"
+    target:
+      source: "file"
+      path: "supabase/migrations/20261017000100_todo_stats.sql"
+    pattern: "security_invoker"
+    flags: "i"
+  - type: "regex"
+    name: "view-created"
+    target:
+      source: "file"
+      path: "supabase/migrations/20261017000100_todo_stats.sql"
+    pattern: "create\\s+(or\\s+replace\\s+)?view"
+    flags: "i"

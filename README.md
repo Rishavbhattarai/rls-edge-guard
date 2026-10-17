@@ -72,13 +72,13 @@ A "Supabase project" means a folder with `supabase/config.toml` or `supabase/mig
 | RLS012 | warn | Materialized view in an exposed schema |
 | STO001 | block | `storage.objects` policy not limited to a bucket |
 | KEY001 | block | Service-role or `sb_secret_` key in a browser-exposed variable, a `'use client'` file, or hardcoded |
-| EDGE001 | block | Node module whose APIs throw in Workers (`child_process`, `worker_threads`, `vm`, ...) |
+| EDGE001 | block / warn | Node module whose APIs throw in Workers (`child_process`, `worker_threads`, `vm`, `node:fs` before 2025-09-15, ...); warn for partial stubs (`dgram`, `repl`, ...) |
 | EDGE002 | block | Node module that needs `nodejs_compat` (or a newer compatibility date) that this project lacks |
 | EDGE003 | block / warn | npm package that can't run in Workers (`bcrypt`, `sharp`, `better-sqlite3`, ...) or fits poorly (`jsonwebtoken`, `express`, ...) |
 | EDGE004 | block | `eval()` / `new Function()` |
-| EDGE005 | block / warn | `process.env` without `nodejs_compat`, or before it is populated |
+| EDGE005 | block / warn | `process.env` where `process` is undefined (no `nodejs_compat` and date before 2026-08-04), or before it is populated (2025-04-01 with the flag) |
 | EDGE006 | warn | I/O or timers at module scope |
-| EDGE007 | warn | `node:fs`, which is a virtual filesystem in Workers |
+| EDGE007 | warn | `node:fs` from 2025-09-15, which is a virtual filesystem without your project files |
 
 Migrations are replayed in order, so `create table` in one migration and `enable row level security` in a later one is understood. When you edit a file, the hook only reports findings located in that file. Use `/rls-edge-guard:audit` for the whole repo.
 
@@ -107,7 +107,7 @@ To turn a rule off for a project, add `.rls-edge-guard.json` at the project root
 
 ## Limits
 
-This is static analysis built on a SQL tokenizer, not a full Postgres parser. It blocks only on patterns it can read with confidence and warns on the rest. It does not see your live database: run Supabase's database advisors (`supabase db lint`) and the generated pgTAP tests for that. Workers compatibility comes from [`compat_matrix.json`](scripts/rls_edge_guard/compat_matrix.json). Its `calibration` field records how and when it was checked.
+This is static analysis built on a SQL tokenizer, not a full Postgres parser. It blocks only on patterns it can read with confidence and warns on the rest. It does not see your live database: run Supabase's database advisors (`supabase db lint`) and the generated pgTAP tests for that. Workers compatibility comes from [`compat_matrix.json`](scripts/rls_edge_guard/compat_matrix.json), **measured in local workerd** (wrangler 4.150.0, workerd 2026-10-06) by [`dev/calibrate_matrix.py`](dev/calibrate_matrix.py). Raw results are in [`docs/evidence/compat-calibration.json`](docs/evidence/compat-calibration.json). Local workerd can differ from the deployed runtime, and Cloudflare keeps adding APIs, so rerun the calibration when you bump Wrangler.
 
 ## Development
 

@@ -1,20 +1,25 @@
 {
-  "_comment": "Node.js built-in support in Cloudflare Workers. 'v1' modules work with nodejs_compat at any compatibility date (node: prefix required before v2). 'v2' modules need nodejs_compat with compatibility_date >= v2_date (or the nodejs_compat_v2 flag). 'runtime_error' modules can be imported with nodejs_compat but their main APIs throw. 'fs' is a virtual filesystem: project files are not present at runtime. See 'calibration' for how each entry was checked.",
+  "_comment": "Node.js built-in support in Cloudflare Workers, measured in local workerd (see calibration). 'no_flags': importable without nodejs_compat. 'v1': works with nodejs_compat at any compatibility_date (node: prefix). 'v2': needs nodejs_compat with compatibility_date >= v2_date (or the nodejs_compat_v2 flag). 'fs': node:fs is unenv stubs that throw until fs_date, then a virtual filesystem. 'runtime_error': importable, but the main APIs throw. 'partial': importable and the probed call did not throw, but the module is documented as a stub; warn only.",
   "v2_date": "2024-09-23",
-  "v1": ["assert", "async_hooks", "buffer", "crypto", "diagnostics_channel", "events", "path", "process", "stream", "string_decoder", "util"],
-  "v2": ["assert/strict", "buffer", "console", "constants", "dns", "dns/promises", "events", "http", "https", "module", "net", "os", "path/posix", "path/win32", "perf_hooks", "punycode", "querystring", "readline", "readline/promises", "stream/consumers", "stream/promises", "stream/web", "sys", "timers", "timers/promises", "tls", "tty", "url", "util/types", "zlib"],
+  "fs_date": "2025-09-15",
+  "process_env_date": "2025-04-01",
+  "process_global_no_flags_date": "2026-08-04",
+  "no_flags": ["process"],
+  "v1": ["assert", "async_hooks", "buffer", "constants", "crypto", "diagnostics_channel", "dns", "events", "module", "net", "path", "process", "querystring", "stream", "string_decoder", "timers", "tls", "url", "util"],
+  "v2": ["assert/strict", "console", "dns/promises", "http", "https", "inspector", "inspector/promises", "os", "path/posix", "path/win32", "perf_hooks", "punycode", "readline", "readline/promises", "stream/consumers", "stream/promises", "stream/web", "sys", "timers/promises", "tty", "util/types", "v8", "zlib"],
   "fs": ["fs", "fs/promises"],
-  "runtime_error": ["child_process", "cluster", "dgram", "domain", "http2", "inspector", "inspector/promises", "repl", "sea", "sqlite", "test", "trace_events", "v8", "vm", "wasi", "worker_threads"],
+  "runtime_error": ["child_process", "cluster", "domain", "http2", "sqlite", "vm", "wasi", "worker_threads"],
+  "partial": ["dgram", "repl", "sea", "test", "trace_events"],
   "alternatives": {
     "child_process": "Workers cannot spawn processes. Use a Container, a Sandbox, or an external service over fetch().",
     "cluster": "Workers scale automatically. Remove cluster.",
+    "domain": "domain.create() does not exist in Workers. Use try/catch or AsyncLocalStorage from node:async_hooks.",
     "worker_threads": "Use Durable Objects, Queues, or ctx.waitUntil() for background work.",
     "vm": "Dynamic code evaluation is disallowed in Workers.",
+    "wasi": "Instantiate WebAssembly modules directly with WebAssembly.instantiate.",
     "dgram": "UDP sockets are not available. TCP is available via connect() from cloudflare:sockets.",
     "http2": "fetch() negotiates HTTP/2 automatically.",
     "sqlite": "Use D1 or Durable Object SQLite storage (ctx.storage.sql).",
-    "v8": "Not available in Workers.",
-    "inspector": "Use wrangler dev --inspect or Workers observability instead.",
     "fs": "There are no project files at runtime. Import JSON/text as modules, or use KV, R2, D1, or static assets."
   },
   "packages": {
@@ -40,7 +45,11 @@
     }
   },
   "calibration": {
-    "status": "unverified",
-    "note": "Initial values from Cloudflare documentation. Run scripts/calibrate_matrix.sh to check against workerd."
+    "status": "measured",
+    "measured": "2026-10-17",
+    "wrangler": "4.150.0",
+    "workerd": "2026-10-06",
+    "method": "dev/calibrate_matrix.py bundles a static import of each module with wrangler deploy --dry-run, then calls a representative API in wrangler dev (local workerd) for configs: no flags @2025-06-01, nodejs_compat @2024-01-01, @2024-09-23, @2026-10-01. Cutover dates (fs_date, process_env_date, process_global_no_flags_date) were bisected the same way.",
+    "evidence": "docs/evidence/compat-calibration.json"
   }
 }

@@ -10,7 +10,7 @@ Workers run on `workerd` (V8 isolates), not Node. Whether a Node API works depen
 - `compatibility_flags = ["nodejs_compat"]` turns on Node built-in support.
 - `compatibility_date`: from `2024-09-23` on, nodejs_compat means "v2", which has many more modules and allows bare specifiers (`'buffer'` as well as `'node:buffer'`).
 
-So the first step is always to read `wrangler.toml` / `wrangler.jsonc`. Don't assume a built-in is broken. With `nodejs_compat` and a recent date, `node:crypto`, `node:buffer`, `node:stream`, `node:events`, `node:path`, `node:util`, `node:zlib`, and `node:net` all work.
+So the first step is always to read `wrangler.toml` / `wrangler.jsonc`. Don't assume a built-in is broken. Measured in workerd (2026-10): with `nodejs_compat` at any date, `node:crypto`, `buffer`, `stream`, `events`, `path`, `util`, `net`, `dns`, `tls`, `url` and `timers` work. From 2024-09-23 on, `zlib`, `http`, `https`, `os` and the rest work too. `node:process` imports even without the flag.
 
 Beware: the Workers Vitest pool turns on `nodejs_compat` by itself, so tests can pass while the real deploy fails. Check the config, not just the tests.
 
@@ -23,8 +23,9 @@ Beware: the Workers Vitest pool turns on `nodejs_compat` by itself, so tests can
 | EDGE001 `worker_threads` / `cluster` | Background work: `ctx.waitUntil()`, Queues, or Durable Objects. Scaling is automatic. |
 | EDGE001 `vm`, EDGE004 `eval` / `new Function` | Disallowed. Use `JSON.parse`, precompiled templates, or a WASM interpreter. |
 | EDGE001 `sqlite` | D1, or `ctx.storage.sql` in a Durable Object. |
-| EDGE007 `fs` | No project files exist at runtime. Import JSON as a module (`import cfg from './cfg.json'`), embed text with a `Text` module rule, or read from KV / R2 / static assets. |
-| EDGE005 `process.env` | Read `env.MY_SECRET` from the handler's `env` argument. With nodejs_compat and date >= 2025-04-01, `process.env` is populated too. |
+| EDGE001 `fs` (date < 2025-09-15) | Before compatibility_date 2025-09-15, `node:fs` calls throw. Bump the date, or avoid fs entirely (next row). |
+| EDGE007 `fs` | From 2025-09-15, `node:fs` is a virtual filesystem (`/tmp` is writable per request). Your project files are not there. Import JSON as a module (`import cfg from './cfg.json'`), embed text with a `Text` module rule, or read from KV / R2 / static assets. |
+| EDGE005 `process.env` | Read `env.MY_SECRET` from the handler's `env` argument. `process.env` is populated with nodejs_compat from 2025-04-01, and without any flag from 2026-08-04. Earlier and without the flag, `process` is not defined. |
 | EDGE006 module-scope I/O | Move `fetch()`, timers, and random values into the handler, or into a lazily initialised helper called from it. |
 
 ## Package swaps (EDGE003)
@@ -55,7 +56,7 @@ export async function hashPassword(password: string, iterations = 100_000) {
 }
 ```
 
-Workers cap PBKDF2 at 100,000 iterations. For password storage at higher cost, use a WASM argon2/bcrypt build, or hash in Supabase Auth instead of in the Worker.
+Keep the iteration count configurable. Local workerd accepted 600,000 iterations in our tests, but limits on the deployed runtime may differ, so verify on a deployed Worker. For heavier password hashing, use a WASM argon2/bcrypt build, or let Supabase Auth handle passwords instead of the Worker.
 
 ## Hashing and HMAC
 

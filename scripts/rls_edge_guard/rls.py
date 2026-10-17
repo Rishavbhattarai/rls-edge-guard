@@ -6,6 +6,7 @@ database advisors (splinter) where one exists.
 """
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 
 from .findings import BLOCK, WARN, Finding
@@ -15,6 +16,7 @@ DEFAULT_EXPOSED = ("public", "graphql_public")
 API_ROLES = {"anon", "authenticated", "public"}
 IDENTITY_FUNCS = {"uid", "jwt", "role", "email"}  # auth.<fn>()
 IDENTITY_IDENTS = {"current_user", "session_user", "current_setting", "current_role"}
+USER_META_RE = re.compile(r"\b(?:user_metadata|raw_user_meta_data)\b", re.I)
 
 HINTS = {
     "RLS001": "ALTER TABLE {name} ENABLE ROW LEVEL SECURITY; then add policies scoped "
@@ -74,6 +76,7 @@ class Func:
     loc: Loc
     definer: bool = False
     search_path: bool = False
+    reads_user_metadata: bool = False
 
 
 @dataclass
@@ -176,6 +179,8 @@ class Model:
         if i < len(t) and t[i].value == "(":
             _, i = find_paren_group(t, i)
         _function_options(t[i:], f)
+        f.reads_user_metadata = any(x.kind == "string" and USER_META_RE.search(x.value)
+                                    for x in t[i:])
         self.funcs[key] = f
 
     def _alter_function(self, t, i, loc):
@@ -431,9 +436,14 @@ class Model:
         exprs = [e for e in (p.using, p.check) if e is not None]
         all_tokens = [tok for e in exprs for tok in e]
 
+        meta_funcs = [_name(k) for k in _called_functions(all_tokens)
+                      if k in self.funcs and self.funcs[k].reads_user_metadata]
         if any(tok.low in ("user_metadata", "raw_user_meta_data") for tok in all_tokens):
             add("RLS004", BLOCK, p.loc, f"{label} trusts user_metadata, which any signed-in "
                 "user can change with supabase.auth.updateUser().")
+        elif meta_funcs:
+            add("RLS004", BLOCK, p.loc, f"{label} calls {', '.join(meta_funcs)}, which reads "
+                "user_metadata. Any signed-in user can change that with supabase.auth.updateUser().")
 
         if p.table == ("storage", "objects") and p.permissive and exprs \
                 and not any(tok.low == "bucket_id" for tok in all_tokens):
@@ -490,6 +500,19 @@ def _has_identity(expr) -> bool:
         if x.value == "." and k + 2 < len(expr) and expr[k + 2].value == "(":
             return True
     return False
+
+
+def _called_functions(expr):
+    """Keys of functions called in a policy expression: f(...) or schema.f(...)."""
+    out = []
+    for k, x in enumerate(expr):
+        if x.kind not in ("ident", "qident") or k + 1 >= len(expr) or expr[k + 1].value != "(":
+            continue
+        if k >= 2 and expr[k - 1].value == "." and expr[k - 2].kind in ("ident", "qident"):
+            out.append((expr[k - 2].low, x.low))
+        else:
+            out.append(("public", x.low))
+    return out
 
 
 def _bare_auth_call(expr) -> bool:
