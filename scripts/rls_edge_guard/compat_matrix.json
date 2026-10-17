@@ -1,0 +1,46 @@
+{
+  "_comment": "Node.js built-in support in Cloudflare Workers. 'v1' modules work with nodejs_compat at any compatibility date (node: prefix required before v2). 'v2' modules need nodejs_compat with compatibility_date >= v2_date (or the nodejs_compat_v2 flag). 'runtime_error' modules can be imported with nodejs_compat but their main APIs throw. 'fs' is a virtual filesystem: project files are not present at runtime. See 'calibration' for how each entry was checked.",
+  "v2_date": "2024-09-23",
+  "v1": ["assert", "async_hooks", "buffer", "crypto", "diagnostics_channel", "events", "path", "process", "stream", "string_decoder", "util"],
+  "v2": ["assert/strict", "buffer", "console", "constants", "dns", "dns/promises", "events", "http", "https", "module", "net", "os", "path/posix", "path/win32", "perf_hooks", "punycode", "querystring", "readline", "readline/promises", "stream/consumers", "stream/promises", "stream/web", "sys", "timers", "timers/promises", "tls", "tty", "url", "util/types", "zlib"],
+  "fs": ["fs", "fs/promises"],
+  "runtime_error": ["child_process", "cluster", "dgram", "domain", "http2", "inspector", "inspector/promises", "repl", "sea", "sqlite", "test", "trace_events", "v8", "vm", "wasi", "worker_threads"],
+  "alternatives": {
+    "child_process": "Workers cannot spawn processes. Use a Container, a Sandbox, or an external service over fetch().",
+    "cluster": "Workers scale automatically. Remove cluster.",
+    "worker_threads": "Use Durable Objects, Queues, or ctx.waitUntil() for background work.",
+    "vm": "Dynamic code evaluation is disallowed in Workers.",
+    "dgram": "UDP sockets are not available. TCP is available via connect() from cloudflare:sockets.",
+    "http2": "fetch() negotiates HTTP/2 automatically.",
+    "sqlite": "Use D1 or Durable Object SQLite storage (ctx.storage.sql).",
+    "v8": "Not available in Workers.",
+    "inspector": "Use wrangler dev --inspect or Workers observability instead.",
+    "fs": "There are no project files at runtime. Import JSON/text as modules, or use KV, R2, D1, or static assets."
+  },
+  "packages": {
+    "block": {
+      "bcrypt": "native addon. Use bcryptjs, or PBKDF2 via crypto.subtle.",
+      "argon2": "native addon. Use a WASM build (e.g. hash-wasm) or PBKDF2 via crypto.subtle.",
+      "sharp": "native addon. Use Cloudflare Images or the IMAGES binding.",
+      "canvas": "native addon. Use a WASM renderer or Browser Rendering.",
+      "better-sqlite3": "native addon. Use D1 or Durable Object SQLite storage.",
+      "sqlite3": "native addon. Use D1 or Durable Object SQLite storage.",
+      "pg-native": "native addon. Use pg or postgres with Hyperdrive.",
+      "puppeteer": "launches a local Chrome. Use @cloudflare/puppeteer with Browser Rendering.",
+      "playwright": "launches a local browser. Use @cloudflare/playwright with Browser Rendering.",
+      "playwright-core": "launches a local browser. Use @cloudflare/playwright with Browser Rendering."
+    },
+    "warn": {
+      "jsonwebtoken": "relies on Node crypto key objects and is heavy. jose is built on Web Crypto.",
+      "express": "built around a Node HTTP server. Hono is the common Workers-native equivalent.",
+      "dotenv": "there is no .env file at runtime. Use vars and secrets in your wrangler config; they arrive on env.",
+      "ioredis": "needs a long-lived TCP connection. Use @upstash/redis over HTTP or a Workers-native client.",
+      "node-fetch": "fetch() is built in. Remove node-fetch.",
+      "multer": "expects Node streams from Express. Use request.formData()."
+    }
+  },
+  "calibration": {
+    "status": "unverified",
+    "note": "Initial values from Cloudflare documentation. Run scripts/calibrate_matrix.sh to check against workerd."
+  }
+}

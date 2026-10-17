@@ -1,0 +1,90 @@
+name: CI
+
+# Mirrors the checks anthropics/claude-plugins-official runs on directory entries,
+# plus this plugin's own tests. The policy self-scan uses the official scan prompt
+# and schema, pinned to a commit, and runs only on manual dispatch (it needs an API key).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      policy_scan:
+        description: Run the official policy scan prompt against this repo (needs ANTHROPIC_API_KEY)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  OFFICIAL_SHA: ea10b213686c90bb1984b2016937310e05336cf3
+  CLAUDE_CODE_VERSION: 2.1.302
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Unit and hook tests
+        run: python -m unittest discover -s tests -v
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: claude plugin validate --strict (plugin and marketplace)
+        run: |
+          npx -y "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" plugin validate --strict .claude-plugin/plugin.json
+          npx -y "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" plugin validate --strict .claude-plugin/marketplace.json
+      - name: Aux files parse as JSON
+        run: |
+          for f in hooks/hooks.json .claude-plugin/plugin.json .claude-plugin/marketplace.json scripts/rls_edge_guard/compat_matrix.json; do
+            python3 -m json.tool "$f" > /dev/null && echo "ok $f"
+          done
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+      - name: Frontmatter (official validator)
+        run: |
+          mkdir -p /tmp/fm && cd /tmp/fm
+          curl -fsSL "https://raw.githubusercontent.com/anthropics/claude-plugins-official/${OFFICIAL_SHA}/.github/scripts/validate-frontmatter.ts" -o validate-frontmatter.ts
+          bun add yaml
+          cd "$GITHUB_WORKSPACE"
+          bun /tmp/fm/validate-frontmatter.ts skills/*/SKILL.md commands/*.md
+
+  policy-scan:
+    if: github.event_name == 'workflow_dispatch' && inputs.policy_scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run the official scan prompt
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          base="https://raw.githubusercontent.com/anthropics/claude-plugins-official/${OFFICIAL_SHA}/.github/policy"
+          curl -fsSL "$base/prompt.md" -o /tmp/prompt.md
+          curl -fsSL "$base/schema.json" -o /tmp/schema.json
+          npx -y "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" -p "$(cat /tmp/prompt.md)" \
+            --output-format json --json-schema "$(cat /tmp/schema.json)" \
+            --allowedTools "Read,Glob,Grep" > /tmp/scan.json
+          python3 - <<'PY'
+          import json
+          out = json.load(open("/tmp/scan.json"))
+          verdict = out.get("structured_output") or json.loads(out.get("result", "{}"))
+          print(json.dumps(verdict, indent=2))
+          assert verdict.get("passes") is True, "policy scan failed"
+          assert verdict.get("has_broad_scope_hooks") is False
+          assert verdict.get("has_undisclosed_telemetry") is False
+          PY

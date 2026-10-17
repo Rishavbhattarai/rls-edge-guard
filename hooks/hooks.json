@@ -1,0 +1,58 @@
+{
+  "description": "rls-edge-guard: lint SQL, Worker code and Supabase keys after edits; lint SQL before Supabase MCP migrations; audit before supabase db push / wrangler deploy. Silent outside Supabase and Cloudflare Workers projects.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/guard.py\" hook post-edit",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "^mcp__.*supabase.*__(apply_migration|execute_sql)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/guard.py\" hook pre-mcp",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(*supabase db push*)",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/guard.py\" hook pre-deploy",
+            "timeout": 60
+          },
+          {
+            "type": "command",
+            "if": "Bash(*supabase migration up*)",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/guard.py\" hook pre-deploy",
+            "timeout": 60
+          },
+          {
+            "type": "command",
+            "if": "Bash(*wrangler deploy*)",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/guard.py\" hook pre-deploy",
+            "timeout": 60
+          },
+          {
+            "type": "command",
+            "if": "Bash(*wrangler versions*)",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/guard.py\" hook pre-deploy",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  }
+}

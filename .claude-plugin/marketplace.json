@@ -1,0 +1,15 @@
+{
+  "name": "rls-edge-guard",
+  "description": "Marketplace for the rls-edge-guard plugin: Supabase RLS and Cloudflare Workers guardrails for Claude Code.",
+  "owner": {
+    "name": "Rishav Bhattarai"
+  },
+  "plugins": [
+    {
+      "name": "rls-edge-guard",
+      "source": "./",
+      "description": "Blocks insecure Supabase RLS SQL, leaked service-role keys, and Cloudflare Workers-incompatible code as Claude writes it. Project-gated local hooks, no network.",
+      "category": "security"
+    }
+  ]
+}
