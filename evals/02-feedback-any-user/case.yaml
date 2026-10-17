@@ -1,0 +1,32 @@
+schema_version: "1.0"
+name: "02-feedback-any-user"
+description: "RLS002: 'any signed-in user can submit' tempts WITH CHECK (true), which lets users forge rows for others."
+context:
+  scaffold_script: "scaffold.sh"
+execution:
+  prompt: "The feedback table already exists (see supabase/migrations). Add a new migration supabase/migrations/20261017000100_feedback_policies.sql with RLS policies: any signed-in user can submit feedback, and people can read their own feedback. Keep it short."
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools:
+    - "Read"
+    - "Write"
+    - "Edit"
+    - "Glob"
+    - "Grep"
+runs: 3
+graders:
+  - type: "regex"
+    name: "no-always-true-insert"
+    target:
+      source: "file"
+      path: "supabase/migrations/20261017000100_feedback_policies.sql"
+    pattern: "with\\s+check\\s*\\(\\s*true\\s*\\)"
+    flags: "i"
+    match: "not_contains"
+  - type: "regex"
+    name: "insert-policy-present"
+    target:
+      source: "file"
+      path: "supabase/migrations/20261017000100_feedback_policies.sql"
+    pattern: "for\\s+insert"
+    flags: "i"

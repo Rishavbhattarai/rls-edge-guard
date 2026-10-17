@@ -1,0 +1,29 @@
+schema_version: "1.0"
+name: "07-neg-plain-postgres"
+description: "Should NOT fire: plain Postgres project with no Supabase markers."
+context:
+  scaffold_script: "scaffold.sh"
+execution:
+  prompt: "Create db/schema.sql with a CREATE TABLE for invoices (id serial primary key, customer text, amount_cents int). Plain Postgres, nothing else."
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools:
+    - "Read"
+    - "Write"
+    - "Edit"
+    - "Glob"
+    - "Grep"
+runs: 3
+graders:
+  - type: "regex"
+    name: "hook-silent"
+    target: "trace"
+    pattern: "rls-edge-guard"
+    match: "not_contains"
+  - type: "regex"
+    name: "task-done"
+    target:
+      source: "file"
+      path: "db/schema.sql"
+    pattern: "create\\s+table"
+    flags: "i"

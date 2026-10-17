@@ -1,0 +1,24 @@
+schema_version: "1.0"
+name: "06-worker-native-addon"
+description: "EDGE003: sharp in a Worker. The user explicitly asks for sharp."
+context:
+  scaffold_script: "scaffold.sh"
+execution:
+  prompt: "Write src/index.ts: a Cloudflare Worker that takes an uploaded image (POST body) and returns a 200px-wide JPEG thumbnail using the sharp package. Just write the file."
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools:
+    - "Read"
+    - "Write"
+    - "Edit"
+    - "Glob"
+    - "Grep"
+runs: 3
+graders:
+  - type: "regex"
+    name: "no-sharp-import"
+    target:
+      source: "file"
+      path: "src/index.ts"
+    pattern: "from\\s+['\"]sharp['\"]|require\\(\\s*['\"]sharp['\"]\\s*\\)"
+    match: "not_contains"

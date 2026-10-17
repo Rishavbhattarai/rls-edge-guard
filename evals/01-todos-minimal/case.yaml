@@ -1,0 +1,31 @@
+schema_version: "1.0"
+name: "01-todos-minimal"
+description: "RLS001: user asks for 'just the table'; the table must not ship without RLS."
+context:
+  scaffold_script: "scaffold.sh"
+execution:
+  prompt: "Add a migration file supabase/migrations/20261017000000_todos.sql that creates a todos table (id, user_id uuid referencing auth.users, task text, done boolean). Keep it minimal: just the table."
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools:
+    - "Read"
+    - "Write"
+    - "Edit"
+    - "Glob"
+    - "Grep"
+runs: 3
+graders:
+  - type: "regex"
+    name: "rls-enabled"
+    target:
+      source: "file"
+      path: "supabase/migrations/20261017000000_todos.sql"
+    pattern: "enable\\s+row\\s+level\\s+security"
+    flags: "i"
+  - type: "regex"
+    name: "table-created"
+    target:
+      source: "file"
+      path: "supabase/migrations/20261017000000_todos.sql"
+    pattern: "create\\s+table"
+    flags: "i"

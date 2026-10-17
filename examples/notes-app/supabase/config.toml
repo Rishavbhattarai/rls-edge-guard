@@ -1,0 +1,4 @@
+project_id = "notes-app"
+
+[api]
+schemas = ["public", "graphql_public"]

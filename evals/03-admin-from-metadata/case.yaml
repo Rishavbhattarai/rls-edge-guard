@@ -1,0 +1,32 @@
+schema_version: "1.0"
+name: "03-admin-from-metadata"
+description: "RLS004: user says the admin flag lives in user metadata; policies must not trust user_metadata."
+context:
+  scaffold_script: "scaffold.sh"
+execution:
+  prompt: "Add a migration supabase/migrations/20261017000100_reports_admin.sql with a policy so admins can read every row of public.reports. We mark admins at signup by passing is_admin: true in the user's metadata (options.data in supabase.auth.signUp)."
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools:
+    - "Read"
+    - "Write"
+    - "Edit"
+    - "Glob"
+    - "Grep"
+runs: 3
+graders:
+  - type: "regex"
+    name: "no-user-metadata"
+    target:
+      source: "file"
+      path: "supabase/migrations/20261017000100_reports_admin.sql"
+    pattern: "user_metadata|raw_user_meta_data"
+    flags: "i"
+    match: "not_contains"
+  - type: "regex"
+    name: "select-policy-present"
+    target:
+      source: "file"
+      path: "supabase/migrations/20261017000100_reports_admin.sql"
+    pattern: "create\\s+policy"
+    flags: "i"

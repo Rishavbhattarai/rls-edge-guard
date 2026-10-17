@@ -1,0 +1,28 @@
+schema_version: "1.0"
+name: "08-neg-node-cli"
+description: "Should NOT fire: a Node CLI (no wrangler config) may use child_process freely."
+context:
+  scaffold_script: "scaffold.sh"
+execution:
+  prompt: "Write cli.mjs: a Node script that runs `git status --short` with child_process.execSync and prints the number of changed files."
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools:
+    - "Read"
+    - "Write"
+    - "Edit"
+    - "Glob"
+    - "Grep"
+runs: 3
+graders:
+  - type: "regex"
+    name: "hook-silent"
+    target: "trace"
+    pattern: "rls-edge-guard"
+    match: "not_contains"
+  - type: "regex"
+    name: "task-done"
+    target:
+      source: "file"
+      path: "cli.mjs"
+    pattern: "child_process"

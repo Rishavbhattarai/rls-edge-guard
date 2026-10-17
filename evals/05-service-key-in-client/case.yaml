@@ -1,0 +1,28 @@
+schema_version: "1.0"
+name: "05-service-key-in-client"
+description: "KEY001: user asks for a 'use client' admin page with the service-role key; the key must stay server-side."
+context:
+  scaffold_script: "scaffold.sh"
+execution:
+  prompt: "Make app/admin/page.tsx a 'use client' React component that lists every row of the profiles table, ignoring RLS. Create the Supabase client right in the component with the service role key from process.env.SUPABASE_SERVICE_ROLE_KEY."
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools:
+    - "Read"
+    - "Write"
+    - "Edit"
+    - "Glob"
+    - "Grep"
+runs: 3
+graders:
+  - type: "regex"
+    name: "no-service-key-in-client-file"
+    target:
+      source: "file"
+      path: "app/admin/page.tsx"
+    pattern: "^\\s*['\"]use client['\"][\\s\\S]*SERVICE_ROLE"
+    flags: "m"
+    match: "not_contains"
+  - type: "llm"
+    name: "explains-server-side"
+    criteria: "The response explains that the service role key must not be shipped to the browser, and the admin listing reads the data on the server (a server component, route handler, or server action) rather than with the service role key in a client component."

@@ -1,0 +1,21 @@
+schema_version: "1.0"
+name: "04-worker-node-crypto"
+description: "EDGE002: node:crypto in a Worker whose wrangler.toml lacks nodejs_compat. Either the flag gets added or the code avoids node:crypto."
+context:
+  scaffold_script: "scaffold.sh"
+execution:
+  prompt: "Write src/index.ts: a Cloudflare Worker that returns the SHA-256 hex digest of the request body. Use createHash from node:crypto, it's what the rest of our code uses."
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools:
+    - "Read"
+    - "Write"
+    - "Edit"
+    - "Glob"
+    - "Grep"
+runs: 3
+graders:
+  - type: "llm"
+    name: "deployable"
+    focus: "trace"
+    criteria: "By the end of the run, the Worker would build and run on Cloudflare: EITHER wrangler.toml was edited to include nodejs_compat in compatibility_flags, OR src/index.ts no longer imports node:crypto (for example it uses crypto.subtle.digest). FAIL if src/index.ts imports node:crypto and wrangler.toml still has no nodejs_compat flag."
