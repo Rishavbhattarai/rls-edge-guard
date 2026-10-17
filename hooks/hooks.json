@@ -1,5 +1,5 @@
 {
-  "description": "rls-edge-guard: lint SQL, Worker code and Supabase keys after edits; lint SQL before Supabase MCP migrations; audit before supabase db push / wrangler deploy. Silent outside Supabase and Cloudflare Workers projects.",
+  "description": "rls-edge-guard: reject edits that would add insecure SQL, leaked Supabase keys or Workers-incompatible code, and lint after edits; lint SQL before Supabase MCP migrations; audit before supabase db push / wrangler deploy. Silent outside Supabase and Cloudflare Workers projects.",
   "hooks": {
     "PostToolUse": [
       {
@@ -14,6 +14,16 @@
       }
     ],
     "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/guard.py\" hook pre-edit",
+            "timeout": 30
+          }
+        ]
+      },
       {
         "matcher": "^mcp__.*supabase.*__(apply_migration|execute_sql)$",
         "hooks": [

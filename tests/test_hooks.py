@@ -154,6 +154,73 @@ class Blocking(unittest.TestCase):
         self.assertEqual(run("pre-deploy", payload)[0], 0)
 
 
+class PreEditGate(unittest.TestCase):
+    """PreToolUse on Write/Edit/MultiEdit rejects edits that would ADD a blocking finding."""
+
+    def pre(self, d, tool, rel, **tool_input):
+        return run("pre-edit", {"tool_name": tool, "cwd": d,
+                                "tool_input": {"file_path": os.path.join(d, rel), **tool_input}})
+
+    def test_write_new_migration_without_rls_is_rejected(self):
+        d = make(SUPA)
+        code, _, err = self.pre(d, "Write", "supabase/migrations/20261017000000_t.sql",
+                                content="create table t (id int);")
+        self.assertEqual(code, 2)
+        self.assertIn("was not applied", err)
+        self.assertIn("RLS001", err)
+        self.assertFalse(os.path.exists(os.path.join(d, "supabase/migrations/20261017000000_t.sql")))
+
+    def test_new_migration_sees_earlier_ones(self):
+        d = make({**SUPA, "supabase/migrations/1_a.sql": "create table t (id int);"})
+        code, _, _ = self.pre(d, "Write", "supabase/migrations/2_b.sql",
+                              content="alter table t enable row level security;")
+        self.assertEqual(code, 0)
+
+    def test_edit_that_adds_problem_is_rejected(self):
+        d = make({**WRANGLER, "src/index.ts": "export default { fetch() { return new Response('ok') } };\n"})
+        code, _, err = self.pre(d, "Edit", "src/index.ts", old_string="export default",
+                                new_string="import sharp from 'sharp';\nexport default")
+        self.assertEqual(code, 2)
+        self.assertIn("EDGE003", err)
+
+    def test_partial_fix_of_existing_problems_is_allowed(self):
+        src = "import sharp from 'sharp';\nimport { exec } from 'node:child_process';\n"
+        d = make({**WRANGLER, "src/index.ts": src})
+        code, _, _ = self.pre(d, "Edit", "src/index.ts", old_string="import sharp from 'sharp';\n",
+                              new_string="")
+        self.assertEqual(code, 0)
+
+    def test_multiedit_and_replace_all(self):
+        d = make({**WRANGLER, "src/index.ts": "const a = 1;\nconst b = 1;\n"})
+        code, _, err = self.pre(d, "MultiEdit", "src/index.ts", edits=[
+            {"old_string": "const a = 1;", "new_string": "const a = eval('1');"},
+            {"old_string": "1;", "new_string": "2;", "replace_all": True}])
+        self.assertEqual(code, 2)
+        self.assertIn("EDGE004", err)
+
+    def test_edit_with_missing_old_string_passes_through(self):
+        d = make({**WRANGLER, "src/index.ts": "const a = 1;\n"})
+        self.assertEqual(self.pre(d, "Edit", "src/index.ts", old_string="nope", new_string="eval(x)")[0], 0)
+
+    def test_ignore_comment_lets_it_through(self):
+        d = make(WRANGLER)
+        code, _, _ = self.pre(d, "Write", "src/index.ts", content=(
+            "// rls-edge-guard-ignore EDGE003: user insists; deploying to Node, not Workers\n"
+            "import sharp from 'sharp';\n"))
+        self.assertEqual(code, 0)
+
+    def test_gated_outside_projects(self):
+        d = make({})
+        self.assertEqual(self.pre(d, "Write", "src/index.ts", content="eval(x)"), (0, "", ""))
+
+    def test_key_leak_in_new_client_file(self):
+        d = make({"package.json": '{"dependencies": {"@supabase/supabase-js": "2"}}'})
+        code, _, err = self.pre(d, "Write", "app/admin/page.tsx", content=(
+            "'use client'\nconst s = createClient(u, process.env.SUPABASE_SERVICE_ROLE_KEY!)\n"))
+        self.assertEqual(code, 2)
+        self.assertIn("KEY001", err)
+
+
 class Keys(unittest.TestCase):
     def jwt(self, role):
         seg = base64.urlsafe_b64encode(json.dumps({"role": role, "iss": "supabase"}).encode()).decode().rstrip("=")

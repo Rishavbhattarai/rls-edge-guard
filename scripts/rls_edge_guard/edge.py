@@ -20,6 +20,17 @@ TEST_FILE = re.compile(r"\.(test|spec)\.[cm]?[jt]sx?$|\.config\.[cm]?[jt]s$|\.d\
 MAX_FILES = 400
 
 _MATRIX = None
+OVERRIDES = {}  # abs path -> content, for checking an edit before it is written
+
+
+def read_source(path: str):
+    if path in OVERRIDES:
+        return OVERRIDES[path]
+    try:
+        with open(path, encoding="utf-8", errors="replace") as fh:
+            return fh.read()
+    except OSError:
+        return None
 
 
 def matrix() -> dict:
@@ -162,7 +173,7 @@ def _resolve(spec: str, from_file: str):
         candidates += [stem + e for e in (".ts", ".tsx", ".mts", ".cts")]
     candidates += [base + e for e in JS_EXTS] + [os.path.join(base, "index" + e) for e in JS_EXTS]
     for c in candidates:
-        if os.path.isfile(c) and c.endswith(JS_EXTS):
+        if (c in OVERRIDES or os.path.isfile(c)) and c.endswith(JS_EXTS):
             return c
     return None
 
@@ -172,14 +183,13 @@ def reachable(entry: str, limit: int = MAX_FILES) -> list:
     seen, stack = [], [entry]
     while stack and len(seen) < limit:
         f = stack.pop()
-        if f in seen or not os.path.isfile(f):
+        if f in seen or not (f in OVERRIDES or os.path.isfile(f)):
             continue
         seen.append(f)
-        try:
-            with open(f, encoding="utf-8", errors="replace") as fh:
-                no_comments, no_strings, _ = jsscan.blank(fh.read())
-        except OSError:
+        src = read_source(f)
+        if src is None:
             continue
+        no_comments, no_strings, _ = jsscan.blank(src)
         for spec, _, type_only in jsscan.imports(no_comments, no_strings):
             if spec.startswith(".") and not type_only:
                 r = _resolve(spec, f)

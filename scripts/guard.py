@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """rls-edge-guard entry point.
 
+  guard.py hook pre-edit      PreToolUse (Write|Edit|MultiEdit): reject edits that add a block
   guard.py hook post-edit     PostToolUse (Write|Edit|MultiEdit)
   guard.py hook pre-mcp       PreToolUse on Supabase MCP apply_migration / execute_sql
   guard.py hook pre-deploy    PreToolUse on Bash: supabase db push / wrangler deploy
@@ -30,11 +31,7 @@ MCP_RE = re.compile(r"^mcp__.*supabase.*__(apply_migration|execute_sql)$", re.I)
 
 
 def _read(path):
-    try:
-        with open(path, encoding="utf-8", errors="replace") as fh:
-            return fh.read()
-    except OSError:
-        return None
+    return edge.read_source(os.path.abspath(path))
 
 
 def _filter(findings, root):
@@ -46,7 +43,7 @@ def _filter(findings, root):
 def check_sql_file(path):
     root = project.supabase_root(path)
     if root and project.is_migration(path, root):
-        texts = [(f, _read(f) or "") for f in project.migration_files(root)]
+        texts = [(f, _read(f) or "") for f in project.migration_files(root, extra=path)]
         found = rls.lint_sql_texts(texts, project.exposed_schemas(root))
         return _filter([f for f in found if os.path.abspath(f.file) == os.path.abspath(path)], root)
     root = root or project.supabase_client_root(path)
@@ -89,7 +86,7 @@ def check_wrangler_file(path):
 
 def check_path(path):
     """Findings for one edited file, or None when the file is out of scope."""
-    if not os.path.isfile(path):
+    if not (os.path.isfile(path) or path in edge.OVERRIDES):
         return None
     base = os.path.basename(path)
     if path.endswith(".sql"):
@@ -133,6 +130,40 @@ def audit(root):
     return unique
 
 
+def simulate_edit(tool_name, tool_input, path):
+    """Content the file would have after this Write/Edit/MultiEdit, or None if unknown."""
+    if tool_name == "Write":
+        return tool_input.get("content")
+    current = _read(path)
+    if current is None:
+        return None
+    edits = tool_input.get("edits") if tool_name == "MultiEdit" else [tool_input]
+    for e in edits or []:
+        old, new = e.get("old_string") or "", e.get("new_string") or ""
+        if not old or old not in current:
+            return None  # the edit will fail on its own; let the tool report it
+        current = current.replace(old, new) if e.get("replace_all") else current.replace(old, new, 1)
+    return current
+
+
+def new_blocking(path, content):
+    """Blocking findings the edit would add (pre-existing ones are not counted, so
+    incremental fixes to a file that already has problems are never rejected)."""
+    key = lambda f: (f.rule, os.path.abspath(f.file), f.message)  # noqa: E731
+    before = check_path(path) if os.path.isfile(path) else []
+    if before is None:
+        before = []
+    edge.OVERRIDES[path] = content
+    try:
+        after = check_path(path)
+    finally:
+        edge.OVERRIDES.pop(path, None)
+    if after is None:
+        return None
+    seen = {key(f) for f in before}
+    return [f for f in after if f.severity == BLOCK and key(f) not in seen]
+
+
 # ------------------------------------------------------------------ hooks
 def emit(findings, event, root, header):
     if findings is None:
@@ -160,6 +191,26 @@ def hook(mode):
         return 0
     tool_input = payload.get("tool_input") or {}
     cwd = payload.get("cwd") or os.getcwd()
+
+    if mode == "pre-edit":
+        path = tool_input.get("file_path")
+        if not path:
+            return 0
+        if not os.path.isabs(path):
+            path = os.path.join(cwd, path)
+        path = os.path.abspath(path)
+        content = simulate_edit(payload.get("tool_name"), tool_input, path)
+        if content is None:
+            return 0
+        added = new_blocking(path, content)
+        if not added:
+            return 0
+        sys.stderr.write(
+            f"rls-edge-guard: this {payload.get('tool_name')} to {os.path.basename(path)} was not "
+            f"applied: it would add {len(added)} blocking issue(s). Rewrite it without them. If the "
+            "user explicitly wants this despite the risk, keep it and add a comment on or above the "
+            "line: rls-edge-guard-ignore <RULE>: <reason>\n\n" + render(added, cwd) + "\n")
+        return 2
 
     if mode == "post-edit":
         path = tool_input.get("file_path") or tool_input.get("notebook_path")

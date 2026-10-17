@@ -5,13 +5,13 @@ A Claude Code plugin that stops two kinds of bad full-stack code while Claude is
 - **Supabase RLS holes**: tables exposed without Row-Level Security, `USING (true)` write policies, policies that trust `user_metadata`, RLS-bypassing views and `SECURITY DEFINER` functions, storage policies that cover every bucket, and service-role keys that end up in the browser.
 - **Cloudflare Workers runtime breaks**: Node built-ins and native packages that won't run in `workerd` **with this project's** `compatibility_date` and `compatibility_flags`.
 
-Checks are deterministic, local Python (standard library only). A blocking finding is fed back to Claude, which fixes the code before moving on.
+Checks are deterministic, local Python (standard library only). An edit that would **add** a blocking problem is rejected before it is written, with the reason and the fix, so Claude has to rewrite it. Warnings are passed to Claude as context.
 
 > Not affiliated with Supabase or Cloudflare. Works alongside their official plugins (`supabase`, `cloudflare`), which provide MCP access and platform guidance. This plugin adds enforcement.
 
 ## What it looks like
 
-Asked for "just the table", Claude writes a migration without RLS. The hook blocks it:
+Asked for "just the table", Claude writes a migration without RLS. The hook rejects the write:
 
 ```
 rls-edge-guard: after editing 20261017000000_todos.sql: 1 blocking issue(s). ...
@@ -37,7 +37,8 @@ Requires `python3` (3.9+) on `PATH`.
 
 | Hook | Fires on | Acts only when |
 |---|---|---|
-| `PostToolUse` | `Write`, `Edit`, `MultiEdit` | the edited file is SQL in a Supabase project, Worker code under a wrangler config, a wrangler config itself, or client code / `.env*` in a Supabase project |
+| `PreToolUse` | `Write`, `Edit`, `MultiEdit` | same files as below. Simulates the edit in memory and rejects it only if it would add a *new* blocking finding, so fixing a file that already has problems is never blocked |
+| `PostToolUse` | `Write`, `Edit`, `MultiEdit` | the edited file is SQL in a Supabase project, Worker code under a wrangler config, a wrangler config itself, or client code / `.env*` in a Supabase project. Reports warnings, and problems in files the edit newly imports |
 | `PreToolUse` | Supabase MCP `apply_migration` / `execute_sql` | always (the tool is Supabase by definition). Lints the SQL before it reaches your database |
 | `PreToolUse` | `Bash` matching `supabase db push`, `supabase migration up`, `wrangler deploy`, `wrangler versions ...` | a deploy command. Runs a full audit of the working directory first |
 
@@ -45,7 +46,7 @@ A "Supabase project" means a folder with `supabase/config.toml` or `supabase/mig
 
 ### What it reads
 
-- The hook's JSON input from Claude Code (tool name, file path, SQL text, or command).
+- The hook's JSON input from Claude Code (tool name, file path, the proposed file content or edit, SQL text, or command).
 - The edited file, the project's migrations, `supabase/config.toml` (`[api] schemas`), the wrangler config, `package.json`, and files the Worker imports.
 - For `.env*` files and client code, the edited file only, to classify a key. **Secret values are never printed or stored.**
 
@@ -84,7 +85,7 @@ Migrations are replayed in order, so `create table` in one migration and `enable
 
 ## Intentional exceptions
 
-Put a comment with a reason on the line, or the line above:
+If the user really wants it (for example, the code is not deployed to Workers), put a comment with a reason on the line, or the line above. The edit then goes through:
 
 ```sql
 -- rls-edge-guard-ignore RLS002: public waitlist form, insert only

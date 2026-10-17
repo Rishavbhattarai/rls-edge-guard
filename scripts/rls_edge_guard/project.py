@@ -66,15 +66,27 @@ def exposed_schemas(root: str):
     return list(DEFAULT_EXPOSED)
 
 
-def migration_files(root: str) -> list:
-    base = os.path.join(root, "supabase")
-    files = sorted(glob.glob(os.path.join(base, "migrations", "*.sql")))
-    files += sorted(glob.glob(os.path.join(base, "schemas", "**", "*.sql"), recursive=True))
-    return files
-
-
 def is_migration(path: str, root: str) -> bool:
-    return os.path.abspath(path) in {os.path.abspath(f) for f in migration_files(root)}
+    """True for supabase/migrations/*.sql and supabase/schemas/**/*.sql, existing or not."""
+    rel = os.path.relpath(os.path.abspath(path), os.path.join(os.path.abspath(root), "supabase"))
+    parts = rel.split(os.sep)
+    if not rel.endswith(".sql") or parts[0] == "..":
+        return False
+    return (parts[0] == "migrations" and len(parts) == 2) or parts[0] == "schemas"
+
+
+def migration_files(root: str, extra: str = None) -> list:
+    """Migrations then declarative schemas, each sorted. `extra` (a file about to be
+    written) is slotted into its place if it is not on disk yet."""
+    base = os.path.join(root, "supabase")
+    migs = glob.glob(os.path.join(base, "migrations", "*.sql"))
+    schemas = glob.glob(os.path.join(base, "schemas", "**", "*.sql"), recursive=True)
+    if extra and is_migration(extra, root):
+        extra = os.path.abspath(extra)
+        target = migs if os.sep + "migrations" + os.sep in extra else schemas
+        if extra not in {os.path.abspath(f) for f in target}:
+            target.append(extra)
+    return sorted(migs) + sorted(schemas)
 
 
 def disabled_rules(root: str) -> set:
