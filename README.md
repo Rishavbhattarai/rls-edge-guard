@@ -22,6 +22,18 @@ through the Supabase Data API and has RLS disabled. Anyone with the anon key can
 
 Claude adds `alter table public.todos enable row level security;` and tells you why.
 
+## Does it help?
+
+Measured with `claude plugin eval` on 9 cases (7 should-fire, 2 should-not-fire), 3 runs each, with and without the plugin:
+
+| Model | With plugin | Without | Δ |
+|---|---|---|---|
+| Default (Opus) | 1.00 | 0.94 | +0.06 |
+| Sonnet | 0.98 | 0.78 | +0.20 |
+| Haiku | 0.93 | 0.76 | +0.17 |
+
+The plugin never made a case worse, and it stayed silent in non-Supabase/non-Workers projects. The strongest model already avoids most of these mistakes, so treat the plugin as a deterministic backstop. Every model, without it, shipped a table without RLS when asked for "just the table". Per-case results and honest misses are in [`docs/evidence/evals.md`](docs/evidence/evals.md). Static findings are also checked against real Postgres with pgTAP ([`docs/evidence/pgtap-proof.md`](docs/evidence/pgtap-proof.md)).
+
 ## Install
 
 ```
@@ -55,6 +67,8 @@ A "Supabase project" means a folder with `supabase/config.toml` or `supabase/mig
 - No network calls, no telemetry, no update checks.
 - No package installs.
 - Nothing outside the project directory it finds.
+
+These guarantees cover the hooks. The skills may *suggest* commands that use the network or Docker (for example `supabase start` / `supabase test db` in `rls-pgtap-prover`, or `npm install bcryptjs` in `workers-edge-port`). Like any command, those run only if you approve them. The `dev/` folder holds maintainer-only scripts (pgTAP and workerd calibration harnesses). Nothing loads or runs them automatically.
 
 ## Rules
 
@@ -116,6 +130,7 @@ This is static analysis built on a SQL tokenizer, not a full Postgres parser. It
 python3 -m unittest discover -s tests -v      # 3.9+
 claude plugin validate --strict .claude-plugin/plugin.json
 python3 scripts/guard.py audit path/to/project
+claude plugin eval . --scaffold --allow-tools Write Edit --ablation with-without   # eval suite (uses your Claude account)
 ```
 
 ## License
