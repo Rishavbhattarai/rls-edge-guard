@@ -1,7 +1,7 @@
 {
   "name": "rls-edge-guard",
   "displayName": "RLS & Edge Guard for Supabase + Workers",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Blocks insecure Supabase Row-Level Security SQL, leaked service-role keys, and Cloudflare Workers-incompatible code as Claude writes it. Hooks run after file edits, before Supabase MCP migrations, and before supabase db push / wrangler deploy, but only act in projects with a supabase/ directory, a Supabase client dependency, or a wrangler config. Local Python only: no network calls, no telemetry, no installs. Includes skills to author RLS policies, prove them with pgTAP, and port Node APIs to Workers.",
   "author": { "name": "Rishav Bhattarai" },
   "homepage": "https://github.com/Rishavbhattarai/rls-edge-guard",
