@@ -83,14 +83,15 @@ def write_project(d, cfg, src):
         fh.write(src)
     flags = json.dumps(cfg["flags"])
     with open(os.path.join(d, "wrangler.toml"), "w") as fh:
-        fh.write(f'name = "calib"\nmain = "src/index.js"\ncompatibility_date = "{cfg["date"]}"\n'
+        fh.write(f'name = "calib"\nmain = "src/index.js"\nsend_metrics = false\n'
+                 f'compatibility_date = "{cfg["date"]}"\n'
                  f"compatibility_flags = {flags}\n")
 
 
 def env():
-    # Only what wrangler needs to find node and its cache; nothing else from the caller.
-    return {"PATH": os.environ.get("PATH", ""), "HOME": os.environ.get("HOME", ""),
-            "WRANGLER_SEND_METRICS": "false", "CI": "1", "NO_COLOR": "1"}
+    # None: wrangler inherits the caller's environment as-is (it needs PATH and HOME).
+    # Telemetry is turned off in the generated wrangler.toml (send_metrics = false).
+    return None
 
 
 def bundles(wrangler, cfg, spec):

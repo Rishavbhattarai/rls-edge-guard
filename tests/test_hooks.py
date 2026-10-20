@@ -33,7 +33,7 @@ def make(files):
 def run(mode, payload, env=None):
     proc = subprocess.run([sys.executable, GUARD, "hook", mode], input=json.dumps(payload),
                           capture_output=True, text=True, timeout=30,
-                          env={**os.environ, **(env or {})})
+                          env=env)  # None: inherit; tests that need a variable pass a literal env
     return proc.returncode, proc.stdout, proc.stderr
 
 
@@ -72,7 +72,7 @@ class Gating(unittest.TestCase):
     def test_kill_switch(self):
         d = make({**SUPA, "supabase/migrations/1_a.sql": "create table t (id int);"})
         self.assertEqual(run("post-edit", edit(d, "supabase/migrations/1_a.sql"),
-                             {"RLS_EDGE_GUARD_DISABLE": "1"})[0], 0)
+                             {"PATH": "/usr/bin:/bin", "RLS_EDGE_GUARD_DISABLE": "1"})[0], 0)
 
     def test_bad_stdin(self):
         proc = subprocess.run([sys.executable, GUARD, "hook", "post-edit"], input="not json",
