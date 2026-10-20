@@ -5,7 +5,7 @@
   guard.py hook post-edit     PostToolUse (Write|Edit|MultiEdit)
   guard.py hook pre-mcp       PreToolUse on Supabase MCP apply_migration / execute_sql
   guard.py hook pre-deploy    PreToolUse on Bash: supabase db push / wrangler deploy
-  guard.py audit [PATH] [--json]
+  guard.py audit [PATH] [--json] [--exit-zero]
 
 Every hook exits 0 silently unless the edited file or working directory belongs
 to a Supabase project or a Cloudflare Workers project. No network access.
@@ -261,6 +261,8 @@ def main(argv):
                 print(render(found, os.path.abspath(root)))
             blocks = sum(f.severity == BLOCK for f in found)
             print(f"\nrls-edge-guard: {blocks} blocking, {len(found) - blocks} warning(s)")
+        if "--exit-zero" in argv:
+            return 0  # report-only (the /audit command needs exit 0 to show output)
         return 1 if any(f.severity == BLOCK for f in found) else 0
     sys.stderr.write(__doc__)
     return 64

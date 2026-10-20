@@ -67,7 +67,7 @@ PROBES = {
     "tls": "typeof m.connect",
     "trace_events": "m.createTracing({ categories: ['x'] }), 'tracing'",
     "tty": "m.isatty(1)",
-    "url": "new m.URL('https://x.dev/p').host",
+    "url": "new m.URL('http://localhost:8787/p').host",
     "util": "m.format('%s', 'ok')",
     "v8": "typeof m.getHeapStatistics().total_heap_size",
     "vm": "m.runInNewContext('1 + 1')",
@@ -88,7 +88,9 @@ def write_project(d, cfg, src):
 
 
 def env():
-    return {**os.environ, "WRANGLER_SEND_METRICS": "false", "CI": "1", "NO_COLOR": "1"}
+    # Only what wrangler needs to find node and its cache; nothing else from the caller.
+    return {"PATH": os.environ.get("PATH", ""), "HOME": os.environ.get("HOME", ""),
+            "WRANGLER_SEND_METRICS": "false", "CI": "1", "NO_COLOR": "1"}
 
 
 def bundles(wrangler, cfg, spec):

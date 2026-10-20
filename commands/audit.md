@@ -1,12 +1,12 @@
 ---
 description: Audit this repo's Supabase migrations, Supabase keys, and Cloudflare Worker code with rls-edge-guard
 argument-hint: "[path]"
-allowed-tools: Bash(python3:*), Read, Grep, Glob, Edit
+allowed-tools: Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/guard.py audit:*), Read, Grep, Glob
 ---
 
 ## Audit output
 
-!`python3 "${CLAUDE_PLUGIN_ROOT}/scripts/guard.py" audit $ARGUMENTS`
+!`python3 ${CLAUDE_PLUGIN_ROOT}/scripts/guard.py audit --exit-zero $ARGUMENTS`
 
 ## Your task
 

@@ -148,8 +148,8 @@ class Rules(unittest.TestCase):
         self.assertEqual(rules("export default { fetch() { return process.env.KEY } }", NEW_NO_FLAGS), [])
 
     def test_module_scope_io(self):
-        self.assertEqual(rules("const cfg = await fetch('https://x');\n", COMPAT), ["EDGE006"])
-        self.assertEqual(rules("const get = () => fetch('https://x');\n"
+        self.assertEqual(rules("const cfg = await fetch('/api/config');\n", COMPAT), ["EDGE006"])
+        self.assertEqual(rules("const get = () => fetch('/api/config');\n"
                                "export default { async fetch(req) { return fetch(req); } };\n", COMPAT), [])
 
     def test_inline_ignore(self):

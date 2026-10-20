@@ -266,6 +266,9 @@ class Audit(unittest.TestCase):
         proc = subprocess.run([sys.executable, GUARD, "audit", d, "--json"], capture_output=True, text=True)
         self.assertEqual(proc.returncode, 1)
         self.assertEqual(sorted(f["rule"] for f in json.loads(proc.stdout)), ["EDGE003", "RLS001"])
+        report = subprocess.run([sys.executable, GUARD, "audit", "--exit-zero", d], capture_output=True, text=True)
+        self.assertEqual(report.returncode, 0)
+        self.assertIn("RLS001", report.stdout)
 
 
 if __name__ == "__main__":
