@@ -20,7 +20,6 @@ permissions:
 
 env:
   OFFICIAL_SHA: ea10b213686c90bb1984b2016937310e05336cf3
-  CLAUDE_CODE_VERSION: 2.1.302
 
 jobs:
   test:
@@ -45,8 +44,8 @@ jobs:
           node-version: 22
       - name: claude plugin validate --strict (plugin and marketplace)
         run: |
-          npx -y "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" plugin validate --strict .claude-plugin/plugin.json
-          npx -y "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" plugin validate --strict .claude-plugin/marketplace.json
+          npx -y @anthropic-ai/claude-code@2.1.302 plugin validate --strict .claude-plugin/plugin.json
+          npx -y @anthropic-ai/claude-code@2.1.302 plugin validate --strict .claude-plugin/marketplace.json
       - name: Aux files parse as JSON
         run: |
           for f in hooks/hooks.json .claude-plugin/plugin.json .claude-plugin/marketplace.json scripts/rls_edge_guard/compat_matrix.json; do
@@ -76,7 +75,7 @@ jobs:
           base="https://raw.githubusercontent.com/anthropics/claude-plugins-official/${OFFICIAL_SHA}/.github/policy"
           curl -fsSL "$base/prompt.md" -o /tmp/prompt.md
           curl -fsSL "$base/schema.json" -o /tmp/schema.json
-          npx -y "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" -p "$(cat /tmp/prompt.md)" \
+          npx -y @anthropic-ai/claude-code@2.1.302 -p "$(cat /tmp/prompt.md)" \
             --output-format json --json-schema "$(cat /tmp/schema.json)" \
             --allowedTools "Read,Glob,Grep" > /tmp/scan.json
           python3 - <<'PY'

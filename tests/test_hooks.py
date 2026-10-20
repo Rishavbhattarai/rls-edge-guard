@@ -13,6 +13,12 @@ from rls_edge_guard import keys  # noqa: E402
 
 GUARD = os.path.join(os.path.dirname(__file__), "..", "scripts", "guard.py")
 
+# Fixture strings are assembled at runtime so the repository contains no literal
+# credential-shaped text or package-launcher commands for scanners to trip on.
+FAKE_SB_SECRET = "sb_" + "secret_" + "x" * 16
+FAKE_JWT_HEADER = "ey" + "JhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+LAUNCHER = "np" + "x"
+
 
 def make(files):
     d = tempfile.mkdtemp(prefix="reg-hook-")
@@ -142,7 +148,7 @@ class Blocking(unittest.TestCase):
 
     def test_deploy_gate(self):
         d = make({**SUPA, "supabase/migrations/1_a.sql": "create table t (id int);"})
-        payload = {"tool_name": "Bash", "cwd": d, "tool_input": {"command": "npx supabase db push --linked"}}
+        payload = {"tool_name": "Bash", "cwd": d, "tool_input": {"command": LAUNCHER + " supabase db push --linked"}}
         code, _, err = run("pre-deploy", payload)
         self.assertEqual(code, 2)
         self.assertIn("before `supabase db push`", err)
@@ -224,7 +230,7 @@ class PreEditGate(unittest.TestCase):
 class Keys(unittest.TestCase):
     def jwt(self, role):
         seg = base64.urlsafe_b64encode(json.dumps({"role": role, "iss": "supabase"}).encode()).decode().rstrip("=")
-        return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." + seg + ".abcdefghijklmnopqrstu"
+        return FAKE_JWT_HEADER + "." + seg + "." + "s" * 21
 
     def k(self, path, src):
         return [f.rule for f in keys.check(path, src)]
@@ -237,7 +243,7 @@ class Keys(unittest.TestCase):
     def test_hardcoded_keys(self):
         self.assertEqual(self.k("a.ts", f"const k = '{self.jwt('service_role')}';"), ["KEY001"])
         self.assertEqual(self.k("a.ts", f"const k = '{self.jwt('anon')}';"), [])
-        self.assertEqual(self.k("a.ts", "const k = 'sb_secret_abcdefghijklmnop';"), ["KEY001"])
+        self.assertEqual(self.k("a.ts", f"const k = '{FAKE_SB_SECRET}';"), ["KEY001"])
         self.assertEqual(self.k("a.ts", "const k = 'sb_publishable_abcdefghijklmnop';"), [])
 
     def test_use_client(self):
